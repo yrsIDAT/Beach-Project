@@ -1,0 +1,75 @@
+<html>
+<head>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="json2.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var url = 'http://goodbeachguide.co.uk/search-results?beach_name=&wq_grade=0&postcode=TR1&region=South+West&distance=50&lifeguards=0&facility_level=0&dog_restrictions=0&page_size=10000&op=Search&form_build_id=form-162c1397a109396d4e7f965f610feb30&form_id=stbeach_search_long_form';
+	
+	$('body').load(url);
+});
+
+var beaches = [];
+var i = -1;
+var r = /[\n][ ]*/g;
+
+function scrape() {	
+	$('#content-area .clearfix').each(function(index,item) {
+		if (i >= 0) {
+			beaches[i] = {};
+			beaches[i].name = $(this).find('.uc').text();
+			beaches[i].location = $(this).find('.address').text().replace(r, '');
+			beaches[i].type = $(this).find('.beach-type').text().replace(r, '').split(', ');
+			beaches[i].url = $(this).find('.more').attr('href');
+			
+			if (beaches[i].location.split(', ')[1] == 'Devon') beaches.pop()
+			else i++;
+		} else i = 0;
+	});
+	
+	$('body').empty();
+	$('body').append('<div id="output"></div>');
+	
+	for (var i in beaches) {		
+		$('body').append('<div id="beach' + i + '"></div>');
+		$('#beach' + i).load('http://goodbeachguide.co.uk/' + beaches[i].url + ' .beach-inner', function(data) {
+			i = $(this).attr('id').substr(5);
+			beaches[i].description = $(data).find('.beach-description').text().replace(r, '');
+			beaches[i].coords = $(data).find('.lat-long').text().replace(r, '').substr(8);
+			beaches[i].img = $(data).find('.slideshow-inner img').attr('src');
+						
+			var items = document.getElementById('beach' + i).getElementsByClassName('beach-item');
+			
+			for (var j in items) {
+				switch ($('#beach' + i + ' .beach-item:eq(' + j + ') h3').text()) {
+					case 'Water grade 2011':
+						beaches[i].wgrade = items[j].childNodes[2].textContent.replace(r, '');
+						break;
+						
+					case 'Local sewage outflows':
+						beaches[i].sewage = items[j].childNodes[2].textContent.replace(r, '');
+						break;
+						
+					case 'European designated bathing water':
+						beaches[i].bathing = (items[j].childNodes[2].getAttribute('alt') == 'yes')?true:false;
+						break;
+						
+					case 'Lifeguarded':
+						beaches[i].lifeguard = items[j].childNodes[3].textContent.replace(r, '');
+						break;
+						
+					case 'Local facilities':
+						beaches[i].facilities = items[j].childNodes[2].textContent.replace(r, '').toLowerCase().split(', ');
+						break;
+				}
+			}
+			
+			$('#output').text(JSON.stringify(beaches));
+		});
+	}
+}
+</script>
+</head>
+<body>
+</body>
+</html>
