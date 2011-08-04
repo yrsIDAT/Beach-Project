@@ -8,9 +8,14 @@ class BeachModel extends CI_Model {
     
     function getAll($sort)
     {
-    	//if ($sort == false) 
-    	$result = $this->db->query("SELECT * FROM beaches ORDER BY rating DESC");
-    	//else $result = $this->db->query("SELECT * FROM beaches ORDER BY $sort DESC")
+    	if ($sort == false)
+    	{
+    		$result = $this->db->query("SELECT * FROM beaches ORDER BY rating DESC");
+    	}
+    	else {
+    		$sort = explode(',',$sort);
+    		$result = $this->db->query('SELECT * FROM beaches ORDER BY ' . $sort[0] . ' ' . $sort[1]);
+    	}
     	return $result;
     }
 }

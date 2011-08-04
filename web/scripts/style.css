@@ -114,3 +114,19 @@ img {
 	height: 29px;
 	background-image: url('/images/star.png');
 }
+
+.starSelect {
+	width: 32px;
+	height: 29px;
+	display: block;
+	float: left;
+	background-image: url('/images/star.empty.png');
+}
+
+#quietLabel {
+	clear: both;
+}
+
+.mobileContainer {
+	text-align: center;
+}

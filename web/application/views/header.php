@@ -9,7 +9,7 @@
 <body>
 	<div class="container">
 		<div class="header">
-			<h1>Beaches</h1>
+			<h1>Beachwall</h1>
 			<ul class="menu">
 				<li><a href="/beaches/index">Home</a></li>
 				<li><a href="/beaches/all">All beaches</a></li>
