@@ -24,7 +24,7 @@ else
 </div>
 
 <?php
-for ($i=1; $i<7;$i++) {
+for ($i=1; $i<6;$i++) {
 	$row = $db->result_array();
 	$row = $row[$i];
 	
