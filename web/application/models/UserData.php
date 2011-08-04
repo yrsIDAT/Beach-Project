@@ -8,7 +8,7 @@ class UserData extends CI_Model {
     
     function busySubmit($id, $rating)
     {
-    	$this->db->query("INSERT INTO userdata (type,beach,rating) VALUES ('busy','$id','$rating')");
+    	$this->db->query("INSERT INTO userdata (type,beach,rating,date) VALUES ('busy','$id','$rating',NOW())");
     }
     
     function getToday()
