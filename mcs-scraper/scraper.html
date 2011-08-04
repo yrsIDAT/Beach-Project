@@ -1,20 +1,21 @@
 <html>
 <head>
+<style type="text/css">.beach {display: none;}</style>
 <script type="text/javascript" src="jquery.min.js"></script>
 <script type="text/javascript" src="json2.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	var url = 'http://goodbeachguide.co.uk/search-results?beach_name=&wq_grade=0&postcode=TR1&region=South+West&distance=50&lifeguards=0&facility_level=0&dog_restrictions=0&page_size=10000&op=Search&form_build_id=form-162c1397a109396d4e7f965f610feb30&form_id=stbeach_search_long_form';
 	
-	$('body').load(url);
+	$.get(url, scrape);
 });
 
 var beaches = [];
 var i = -1;
 var r = /[\n][ ]*/g;
 
-function scrape() {	
-	$('#content-area .clearfix').each(function(index,item) {
+function scrape(data) {	
+	$(data).find('#content-area .clearfix').each(function(index,item) {
 		if (i >= 0) {
 			beaches[i] = {};
 			beaches[i].name = $(this).find('.uc').text();
@@ -31,7 +32,7 @@ function scrape() {
 	$('body').append('<div id="output"></div>');
 	
 	for (var i in beaches) {		
-		$('body').append('<div id="beach' + i + '"></div>');
+		$('body').append('<div class="beach" id="beach' + i + '"></div>');
 		$('#beach' + i).load('http://goodbeachguide.co.uk/' + beaches[i].url + ' .beach-inner', function(data) {
 			i = $(this).attr('id').substr(5);
 			beaches[i].description = $(data).find('.beach-description').text().replace(r, '');

@@ -1,0 +1,116 @@
+@import url(http://fonts.googleapis.com/css?family=Copse);
+
+html {
+	overflow: auto;
+	overflow-x: hidden;
+	height: 100%;
+}
+
+body {
+	background-color: #E6D4BC;
+	background-image: url('/images/bg.jpg');
+	font-family: Copse, Helvetica, Arial;
+	color: #666;
+	font-size: 18px;
+	overflow: hidden;
+	min-height: 100%;
+}
+
+.container {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+h1 {
+	font-size: 45px;
+	-moz-text-shadow: 0 -1px 0 #999999;
+	-webkit-text-shadow: 0 -1px 0 #999999;
+	text-shadow: 0 -1px 0 #999999;
+	color: #FFF;
+}
+
+h2 {
+	font-size: 30px;
+	margin-bottom: 8px;
+}
+
+ul {
+	float: left;
+}
+
+li {
+	margin: 10px 0px 0px 15px;
+}
+
+li p {
+	float: left;
+}
+
+img {
+	float: left;
+}
+
+.menu {
+	position: absolute;
+	right: -25px;
+}
+
+.menu li a {
+	display: block;
+	float: right;
+	clear: both;
+	width: 160px;
+	height: 32px;
+	padding: 8px 0 0 15px;
+	margin-bottom: 10px;
+	background-color: rgba(0,153,255,0.5);
+	font-size: 20px;
+	color: #FFF;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-transition: all 0.1s linear;
+	text-decoration: none;
+}
+
+.menu li a:hover {
+	margin-right: 15px;
+}
+
+.beachTop {
+	width: 670px;
+	padding: 15px;
+	background-color: rgba(255,255,255,0.5);
+	overflow: auto;
+	margin: 20px auto;
+}
+
+.beachItem {
+	width: 650px;
+	padding: 15px;
+	background-color: rgba(255,255,255,0.3);
+	overflow: auto;
+	margin: 20px auto;
+}
+
+.footer {
+	clear: both;
+	text-align: center;
+	font-size: 14px;
+	color: #999;
+	padding: 15px;
+}
+
+.starContainer {
+	width: 160px;
+	height: 29px;
+	float: left;
+	margin-left: 10px;
+	background-image: url('/images/star.empty.png');
+}
+
+.star {
+	width: 64px;
+	height: 29px;
+	background-image: url('/images/star.png');
+}
